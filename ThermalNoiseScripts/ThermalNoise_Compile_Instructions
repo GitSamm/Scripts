@@ -1,0 +1,83 @@
+These are general instructions on how to compile the thermal noise code on ocean. Since there are two different queues on ocean, there are two different ways to compile the thermal noise codes.
+If there are any questions, please ask Samuel.
+
+######################################################
+######################################################
+######### Compileing on the Ocean Nodes ##############
+######################################################
+######################################################
+
+# Copy over the file the has the information for loading the dealii modules to your home directory.
+cp /home/samuel/bin/dealii_modules.sh ~/
+
+# Now load the enviornment
+
+source ~/dealii_modules.sh
+
+# Load the modules
+
+dealii_load_modules
+
+# Get the thermal noise code:
+
+git clone git@github.com:geoffrey4444/NumericalCoatingThermalNoise.git
+
+# You can also clone the code from your own fork.
+
+cd NumericalCoatingThermalNoise/QuasistaticBrownianThermalNoise/
+
+mkdir build && cd build
+
+# In this next step you need to change the DCATCH_ROOT option to point to your external directory that lives in
+# the directory 2 levels above buld.
+
+cmake .. -DYAMLCPP_ROOT=/opt/ohpc/pub/apps/spack/0.12.0/opt/spack/linux-centos7-x86_64/gcc-7.3.0/yaml-cpp-develop-qcfbbllsdnab3fq2hvn3au7rov3jjb4c/ -DCATCH_ROOT=/home/geoffrey/Codes/NumericalCoatingThermalNoise/external/ -DPROCS_FOR_TESTS=4 -DCMAKE_FIND_LIBRARY_PREFIXES=lib -DCMAKE_FIND_LIBRARY_SUFFIXES=.so
+
+# The command "make" will now compile the code, and you can change the yaml files for whatever inputs you might want.
+
+make
+
+# To run on the cluster, use the sh script 
+
+cp /home/samuel/scripts/OceanBatchScripts/ThermalNoiseSlurmBatchSubmit_v2.sh ~/
+
+cp ~/ThermalNoiseSlurmBatchSubmit_v2.sh ~/NumericalCoatingThermalNoise/QuasistaticBrownianThermalNoise/build/
+
+sbatch ThermalNoiseSlurmBatchSubmit_v2.sh
+
+#####################################################
+#####################################################
+######### Compileing on the Orca Nodes ##############
+#####################################################
+#####################################################
+
+
+# To run most codes on the orca nodes, we need to compile on the orca nodes. First we can copy and clone any neccesary files
+# All steps are identical with one key difference, listed below.
+
+cp /home/samuel/bin/dealii_modules_orca0.sh ~/
+git clone git@github.com:geoffrey4444/NumericalCoatingThermalNoise.git
+cd NumericalCoatingThermalNoise/QuasistaticBrownianThermalNoise/
+mkdir build
+
+# now we are going to compile on the orca 0 node
+
+ssh orca-0-0
+cd NumericalCoatingThermalNoise/QuasistaticBrownianThermalNoise/build/
+source ~/dealii_modules_orca0.sh
+dealii_load_modules
+
+# Here you need to change the DCATCH_ROOT option to point to your external directory that lives in NumericalCoatingThermalNoise
+
+cmake .. -DYAMLCPP_ROOT=/opt/ohpc/pub/apps/spack/0.12.0/opt/spack/linux-centos7-x86_64/gcc-7.3.0/yaml-cpp-develop-qcfbbllsdnab3fq2hvn3au7rov3jjb4c/ -DCATCH_ROOT=/home/geoffrey/Codes/NumericalCoatingThermalNoise/external/ -DPROCS_FOR_TESTS=4 -DCMAKE_FIND_LIBRARY_PREFIXES=lib -DCMAKE_FIND_LIBRARY_SUFFIXES=.so
+
+make
+logout
+cp /home/samuel/scripts/OceanBatchScripts/ThermalNoiseSlurmBatchSubmit_OrcaNodes.sh .
+
+
+# Now that we are back in ocean, we can run sbatch ThermalNoiseSlurmBatchSubmit_OrcaNodes.sh inside of the build directory
+# to submit the job to the orca nodes.
+
+
+

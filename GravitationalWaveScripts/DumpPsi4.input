@@ -1,0 +1,85 @@
+# -*- specinput -*-
+DataBoxItems = ReadFromFile(File=SpatialCoordMap.input;),
+    Subdomain
+    (Items =
+     # differentiator
+     GlobalDifferentiator
+     (GlobalDifferentiator=
+      MatrixMultiply(MultiDim_by_BasisFunction=yes;
+              TopologicalDifferentiator
+               =Spectral(SetBasisFunctionsFromTimingInfo=yes;
+                         # BasisFunctions= (ChebyshevGaussLobatto=ChebyshevGaussLobattoMatrix);
+                         )
+               );
+      ),
+     GlobalIntegrator
+     (Integrator
+      =Spectral(BasisFunctions=
+                (ChebyshevGaussLobatto=ChebyshevGaussLobattoMatrix);
+                );
+      ),
+
+     # Set up zero quantities here
+     EvaluateScalarFormula(Output=ZeroScalar;Formula=0.;),
+     EvaluateScalarFormula(Output=OneScalar;Formula=1.;),
+     EvaluateVectorFormula(Output=Zero3Vector;V[0]=0;V[1]=0;V[2]=0;),
+     EvaluateVectorFormula(Output=Zero4Vector;V[0]=0;V[1]=0;V[2]=0;V[3]=0;),
+     ), # Subdomain
+
+Subdomain(Items=
+	  Add3Plus1ItemsFromGhPsiKappa(psi=psi;kappa=kappa;OutputPrefix=;),
+	  FirstDeriv(Input=kappa;Output=dGRIDkappa;),
+	  AddDerivativesInDualFrame(FramePrefix=Inertial;
+				    GridFrameDerivs=dGRIDkappa;
+				    OutputDerivNames=dkappa;
+				    ),
+	  Add3Plus1ItemsFromGhDerivs(kappa=kappa;
+				     dkappa=dkappa;
+				     OutputPrefix=;
+				     SpatialDim=3;
+	  ),
+	  FirstDeriv(Input=SpatialChristoffel2ndKind;
+		     Output=dGRIDSpatialChristoffel2ndKind;),
+	  Trace(Input=SpatialRicci;Output=SpatialRicciScalar;
+		Indices=0,1;
+		PositionOfIndices=l,l; InvMetric=Invg;),
+	  EvaluateScalarFormula(Output=One;Formula=1;Coords=GridToInertial::MappedCoords;),
+	  Unit1Form(Output=RadialOutwardInertial;
+		    Coordinates=GridToInertial::MappedCoords;
+		    1Form=RadialOutward;
+		    InvMetric=Invg;
+		    AddTimeComponent=false;),
+	  Psi4(Unit1Form=RadialOutwardInertial; 
+	       Output=U8+;
+	       FullTensor=yes;
+	       Metric=g;
+	       InvMetric=Invg;
+	       ExCurv=K;
+	       Ricci=SpatialRicci;
+	       CovDerivK = CdK;
+	  ),
+	  Psi4FromU8(U8=U8+;
+		      Phase = Real;
+		      Output=Psi4;
+		      Center = 0,0,0;
+		      Coords=GridToInertial::MappedCoords;),
+	  EvaluateScalarFormula(Output=rPsi4;
+				A=Psi4;
+				Formula=sqrt(x0^2+x1^2+x2^2)*A;
+				Coords=GridToInertial::MappedCoords;
+	  ),
+	  EvaluateScalarFormula(Output=SqrtSpatialRicciScalar;
+				A=SpatialRicciScalar;
+                               Formula=sqrt(fabs(A));                                                                          
+                               Coords=GridToInertial::MappedCoords;
+          );
+		      
+		      
+				
+    );
+
+Observers = ObserveInSubdir(Subdir=GWVisData; 
+			    Observers=DumpTensors(Input=Psi4,rPsi4,SpatialRicciScalar,SqrtSpatialRicciScalar,Lapse;);
+#			    Observers=DumpTensors(Input=rPsi4,SpatialRicciScalar;);
+    );
+

@@ -1,0 +1,30 @@
+# -*- specinput -*-
+DataBoxItems = ReadFromFile(File=SpatialCoordMap.input;),
+Domain(Items=
+	  ReadTensorsFromDiskWithMap(Dir=./data;
+				     Input=Psi4(Dim=3;Sym=;),
+				           rPsi4(Dim=3;Sym=;),
+				           SpatialRicciScalar(Dim=3;Sym=;),
+				           SqrtSpatialRicciScalar(Dim=3;Sym=;),
+				           Lapse(Dim=3;Sym=;);
+				          # Shift(Dim=3;Sym=1;);
+				     TimeFromDataBox = yes;
+				     DeltaT = 1.e-8;
+				     Interpolator = Simple(TopologicalInterpolator=CardinalInterpolator;);
+				     OutputGlobalVar = rPsi4GlobalVars;
+	  ),
+       TensorFromVars(Output=Psi4;NameOfTensor=Psi4;GlobalVarsInRootDataBox=rPsi4GlobalVars;),
+       TensorFromVars(Output=rPsi4;NameOfTensor=rPsi4;GlobalVarsInRootDataBox=rPsi4GlobalVars;),
+       TensorFromVars(Output=SpatialRicciScalar;NameOfTensor=SpatialRicciScalar;GlobalVarsInRootDataBox=rPsi4GlobalVars;),
+       TensorFromVars(Output=SqrtSpatialRicciScalar;NameOfTensor=SqrtSpatialRicciScalar;GlobalVarsInRootDataBox=rPsi4GlobalVars;),
+       TensorFromVars(Output=Lapse;NameOfTensor=Lapse;GlobalVarsInRootDataBox=rPsi4GlobalVars;);
+#       TensorFromVars(Output=Shift;NameOfTensor=Shift;GlobalVarsInRootDataBox=rPsi4GlobalVars;);
+    );
+
+Observers = 
+	  ConvertToVtk
+	  (Input = Psi4,rPsi4,SpatialRicciScalar,SqrtSpatialRicciScalar,Lapse;
+	   Basename = TestFuncVis;
+	   Coords = GridToInertial::MappedCoords;
+	  );
+

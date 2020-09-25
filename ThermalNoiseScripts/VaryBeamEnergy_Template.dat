@@ -1,0 +1,77 @@
+# These are notes for me. We normalize the mirror radius by some arbitrary value?
+# I don't know if I am using the correct terminology
+# I want to create a script that makes this file for me. 
+
+# The script will copy all of these headers into that script,
+# then it will copy neccesary data over.
+
+
+# Not sure what this dat file is actually for.
+# Is it used to show how the convergence of each of the runs change as we increase the beam size?
+
+
+#Elastic Energy in a deformed mirror
+# [1] Coloumn 2 divided by the original mirror radius
+# [2] Actual mirror radius used in the code
+# [3] energy
+# [4] substrate energy
+# [5] coating energy
+# [6] substrate amp noise (m/sqrt(Hz)) * sqrt(f)
+# [7] coating amp noise (m/sqrt(Hz)) * sqrt(f)
+# [8] total amp noise (m/sqrt(Hz)) * sqrt(f)
+# [9] coating energy11 (zero if amorphous)
+# [10] coating energy12 (zero if amorphous)
+# [11] coating energy44 (zero if amorphous)
+# [12] coating energy bulk (zero if crystal)
+# [13] coating energy shear (zero if crystal)
+# [14] coating energy scaled by loss angle
+# [15] total energy scaled by loss angle
+# [16] check energy (should be the same as [2])
+
+0.15147 026.77669534 
+0.20804 036.77669534 
+0.26461 046.77669534 
+0.32118 056.77669534 
+0.37775 066.77669534 
+0.43431 076.77669534 
+0.49088 086.77669534 
+0.54745 096.77669534 
+0.60402 106.77669534 
+0.66059 116.77669534 
+0.71716 126.77669534 
+0.773726 136.77669534
+0.830294 146.77669534
+0.886863 156.77669534
+0.943431 166.77669534
+1.000000 176.77669534
+1.056568 186.77669534
+1.113137 196.77669534
+1.1697056274 206.77669534
+1.2262741699 216.77669534
+1.3394112549 236.77669534
+1.4525483398 256.77669534
+1.5656854248 276.77669534
+2.1313708496 376.77669534
+2.6970562744 476.77669534
+3.2627416992 576.77669534
+3.8284271241 676.77669534
+4.3941125489 776.77669534
+4.9597979737 876.77669534
+5.5254833985 976.77669534
+6.6568542481 1176.77669534 
+12.3137084962 2176.77669534
+17.9705627443 3176.77669534
+20.2333044436 3576.77669534
+23.6274169924 4176.77669534
+25.8901586917 4576.77669534
+29.2842712405 5176.77669534
+31.5470129398 5576.77669534
+34.9411254886 6176.77669534
+37.2038671879 6576.77669534
+40.5979797367 7176.77669534
+42.860721436 7576.77669534
+46.2548339848 8176.77669534
+48.5175756841 8576.77669534
+51.9116882329 9176.77669534
+54.1744299322 9576.77669534
+56.4371716314 9976.77669534
