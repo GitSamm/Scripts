@@ -1,0 +1,5 @@
+clone spectre, cd into it and source <path to spectre>/support/Environments/ocean_clang.sh and spectre_load_modules .
+mkdir build && cd build
+export SPECTRE_HOME=/home/<path to spectre>
+spectre_run_cmake
+make -j7000 (@Marlo Morales :D) or make -j6 if you don't want to crash ocean (this is to compile the RunTests executable, so if you need a different one, add the name of that afterwards)
