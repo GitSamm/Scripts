@@ -1,0 +1,1 @@
+These are the original scripts Nick used to generate the gravitaitonal wave data/movie.

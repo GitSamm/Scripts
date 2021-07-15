@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Created this file in order to take in a time and a total mass and quickly find the real time in seconds.
+# Use simulation time and total mass tp quickly find the real time in seconds.
 
 from argparse import ArgumentParser, RawTextHelpFormatter
 import argparse

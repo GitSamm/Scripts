@@ -1,0 +1,29 @@
+DataBoxItems = 
+Subdomain(Items=
+	  WeylElectric(Output=DistortedWeylE;
+			    Ricci = DistortedSpatialRicci;
+			    ExCurv = DistortedK;
+			    Invg = DistortedInvg;
+			    Ricci4Flat=true;),
+    SpatialCoordMap::TransformTensorToDifferentFrame
+    (Input =DistortedWeylB;
+     Output=InertialWeylB;
+     IndexPositions=ll;
+     MapPrefixToInputFrame=DistortedToInertial;
+              ),
+
+    SpatialCoordMap::TransformTensorToDifferentFrame
+    (Input =DistortedWeylE;
+     Output=InertialWeylE;
+     IndexPositions=ll;
+     MapPrefixToInputFrame=DistortedToInertial;
+              ),
+
+    SpatialCoordMap::TransformTensorToDifferentFrame
+    (Input =Distortedg;
+     Output=Inertialg;
+     IndexPositions=ll;
+     MapPrefixToInputFrame=DistortedToInertial;
+    );
+);
+

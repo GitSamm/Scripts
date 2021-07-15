@@ -21,7 +21,12 @@ umask 0022
 
 # Load modules
 source /home/geoffrey/apps/spack/share/spack/setup-env.sh 
-spack load paraview
+
+# There are three different paraview modules loaded. If this 
+# one does not work for you, try anther. If none work, 
+# conatact Geoffrey.
+
+spack load paraview/5tgbeko
 
 # Run paraview
 echo "Starting pvbatch..."

@@ -1,0 +1,268 @@
+DataBoxItems =
+    ReadFromFile(File=SpatialCoordMap.input),
+        Domain(
+               Items=
+               ReadSurfaceInfoFromFile(
+                                       FileName=ApparentHorizons/AhACoefs.dat;
+                                       Output = AhA;
+                                       TakeTimeFromDataBox = yes;
+                                       DeltaT=1.e-7;
+                                       ),
+               ReadSurfaceInfoFromFile(
+                                       FileName=ApparentHorizons/AhBCoefs.dat;
+                                       Output = AhB;
+                                       TakeTimeFromDataBox = yes;
+                                       DeltaT=1.e-7;
+                                       ),
+               CoordMappedSurfaceInfo(
+                                      Input=AhA;
+                                      MapPrefix=DistortedToInertial;
+                                      MapGoesToOutputFrame=True;
+                                      Recenter=False;
+                                      Output=AhAInertial;
+                                      ),
+               CoordMappedSurfaceInfo(
+                                      Input=AhB;
+                                      MapPrefix=DistortedToInertial;
+                                      MapGoesToOutputFrame=True;
+                                      Recenter=False;                                                                                      
+                                      Output=AhBInertial;                                                                                                                  
+                                     ),  
+
+    
+        );
+        
+        Observers =
+
+        ObserveInSubdir(
+                    Subdir=Streamlines;
+                    Observers=
+                        ParallelEigenvectorStreamlines
+                        (SymmetricCovariantTensor= VTWeylE;
+                        SpatialMetric=Inertialg;
+                        MapPrefixFromGridFrame =GridToInertial;
+                        AbsoluteErrorScale=1.e-6;
+                        MinimumDlambda=1.e-10;
+                        InitialDlambda=1.e-3;
+                        EigenvalueDegeneracyTol=1.e-9;
+                        DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+                        Verbosity=2;
+                        TerminateOnLambda=50;
+                        Initializer= ApparentHorizon(
+                                    StrahlkorperBasename=AhAInertial;
+                                    Center =();;
+                                    VecA = (0,0,-1);
+                                    VecB = (-1,0,0);
+                                    Basename =TendexAhA_3;
+                                    NumStreams =30.;
+                                    VecAposition=0.0;
+                                    VecBposition=1.0;
+                                    NumRefinements=5;
+                                );
+                        
+                        )
+        
+),
+        ObserveInSubdir(
+                    Subdir=Streamlines;
+                    Observers=
+                        ParallelEigenvectorStreamlines
+                        (SymmetricCovariantTensor= VTWeylE;
+                        SpatialMetric=Inertialg;
+                        MapPrefixFromGridFrame =GridToInertial;
+                        AbsoluteErrorScale=1.e-6;
+                        MinimumDlambda=1.e-10;
+                        InitialDlambda=1.e-3;
+                        EigenvalueDegeneracyTol=1.e-9;
+                        DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+                        Verbosity=2;
+                        TerminateOnLambda=50;
+                        Initializer= ApparentHorizon(
+                                    StrahlkorperBasename=AhAInertial;
+                                    Center =();;
+                                    VecA = (0,0,-1);
+                                    VecB = (1,0,0);
+                                    Basename =TendexAhA_4;
+                                    NumStreams =30.;
+                                    VecAposition=0.0;
+                                    VecBposition=1.0;
+                                    NumRefinements=5;
+                                );
+                        
+                        )
+        
+),
+        ObserveInSubdir(
+                    Subdir=Streamlines;
+                    Observers=
+                        ParallelEigenvectorStreamlines
+                        (SymmetricCovariantTensor= VTWeylE;
+                        SpatialMetric=Inertialg;
+                        MapPrefixFromGridFrame =GridToInertial;
+                        AbsoluteErrorScale=1.e-6;
+                        MinimumDlambda=1.e-10;
+                        InitialDlambda=1.e-3;
+                        EigenvalueDegeneracyTol=1.e-9;
+                        DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+                        Verbosity=2;
+                        TerminateOnLambda=50;
+                        Initializer= ApparentHorizon(
+                                    StrahlkorperBasename=AhAInertial;
+                                    Center =();;
+                                    VecA = (0,0,1);
+                                    VecB = (1,0,0);
+                                    Basename =TendexAhA_1;
+                                    NumStreams =30.;
+                                    VecAposition=0.0;
+                                    VecBposition=1.0;
+                                    NumRefinements=5;
+                                );
+                        
+                        )
+        
+),
+        ObserveInSubdir(
+                    Subdir=Streamlines;
+                    Observers=
+                        ParallelEigenvectorStreamlines
+                        (SymmetricCovariantTensor= VTWeylE;
+                        SpatialMetric=Inertialg;
+                        MapPrefixFromGridFrame =GridToInertial;
+                        AbsoluteErrorScale=1.e-6;
+                        MinimumDlambda=1.e-10;
+                        InitialDlambda=1.e-3;
+                        EigenvalueDegeneracyTol=1.e-9;
+                        DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+                        Verbosity=2;
+                        TerminateOnLambda=50;
+                        Initializer= ApparentHorizon(
+                                    StrahlkorperBasename=AhAInertial;
+                                    Center =();;
+                                    VecA = (0,0,1);
+                                    VecB = (-1,0,0);
+                                    Basename =TendexAhA_2;
+                                    NumStreams =30.;
+                                    VecAposition=0.0;
+                                    VecBposition=1.0;
+                                    NumRefinements=5;
+                                );
+                        
+                        )
+        
+),
+        ObserveInSubdir(
+                    Subdir=Streamlines;
+                    Observers=
+                        ParallelEigenvectorStreamlines
+                        (SymmetricCovariantTensor= VTWeylE;
+                        SpatialMetric=Inertialg;
+                        MapPrefixFromGridFrame =GridToInertial;
+                        AbsoluteErrorScale=1.e-6;
+                        MinimumDlambda=1.e-10;
+                        InitialDlambda=1.e-3;
+                        EigenvalueDegeneracyTol=1.e-9;
+                        DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+                        Verbosity=2;
+                        TerminateOnLambda=50;
+                        Initializer= ApparentHorizon(
+                                    StrahlkorperBasename=AhBInertial;
+                                    Center =();;
+                                    VecA = (0,0,-1);
+                                    VecB = (-1,0,0);
+                                    Basename =TendexAhB_3;
+                                    NumStreams =30.;
+                                    VecAposition=0.0;
+                                    VecBposition=1.0;
+                                    NumRefinements=5;
+                                );
+                        
+                        )
+        
+),
+        ObserveInSubdir(
+                    Subdir=Streamlines;
+                    Observers=
+                        ParallelEigenvectorStreamlines
+                        (SymmetricCovariantTensor= VTWeylE;
+                        SpatialMetric=Inertialg;
+                        MapPrefixFromGridFrame =GridToInertial;
+                        AbsoluteErrorScale=1.e-6;
+                        MinimumDlambda=1.e-10;
+                        InitialDlambda=1.e-3;
+                        EigenvalueDegeneracyTol=1.e-9;
+                        DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+                        Verbosity=2;
+                        TerminateOnLambda=50;
+                        Initializer= ApparentHorizon(
+                                    StrahlkorperBasename=AhBInertial;
+                                    Center =();;
+                                    VecA = (0,0,-1);
+                                    VecB = (1,0,0);
+                                    Basename =TendexAhB_4;
+                                    NumStreams =30.;
+                                    VecAposition=0.0;
+                                    VecBposition=1.0;
+                                    NumRefinements=5;
+                                );
+                        
+                        )
+        
+),
+        ObserveInSubdir(
+                    Subdir=Streamlines;
+                    Observers=
+                        ParallelEigenvectorStreamlines
+                        (SymmetricCovariantTensor= VTWeylE;
+                        SpatialMetric=Inertialg;
+                        MapPrefixFromGridFrame =GridToInertial;
+                        AbsoluteErrorScale=1.e-6;
+                        MinimumDlambda=1.e-10;
+                        InitialDlambda=1.e-3;
+                        EigenvalueDegeneracyTol=1.e-9;
+                        DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+                        Verbosity=2;
+                        TerminateOnLambda=50;
+                        Initializer= ApparentHorizon(
+                                    StrahlkorperBasename=AhBInertial;
+                                    Center =();;
+                                    VecA = (0,0,1);
+                                    VecB = (1,0,0);
+                                    Basename =TendexAhB_1;
+                                    NumStreams =30.;
+                                    VecAposition=0.0;
+                                    VecBposition=1.0;
+                                    NumRefinements=5;
+                                );
+                        
+                        )
+        
+),
+        ObserveInSubdir(
+                    Subdir=Streamlines;
+                    Observers=
+                        ParallelEigenvectorStreamlines
+                        (SymmetricCovariantTensor= VTWeylE;
+                        SpatialMetric=Inertialg;
+                        MapPrefixFromGridFrame =GridToInertial;
+                        AbsoluteErrorScale=1.e-6;
+                        MinimumDlambda=1.e-10;
+                        InitialDlambda=1.e-3;
+                        EigenvalueDegeneracyTol=1.e-9;
+                        DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+                        Verbosity=2;
+                        TerminateOnLambda=50;
+                        Initializer= ApparentHorizon(
+                                    StrahlkorperBasename=AhBInertial;
+                                    Center =();;
+                                    VecA = (0,0,1);
+                                    VecB = (-1,0,0);
+                                    Basename =TendexAhB_2;
+                                    NumStreams =30.;
+                                    VecAposition=0.0;
+                                    VecBposition=1.0;
+                                    NumRefinements=5;
+                                );
+                        
+                        )
+        
+);

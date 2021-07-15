@@ -1,0 +1,555 @@
+DataBoxItems =
+   ReadFromFile(File=SpatialCoordMap.input),
+   Domain(
+   Items=
+        ReadSurfaceInfoFromFile(
+            FileName=ApparentHorizons/AhACoefs.dat;
+            Output = AhA;
+	    TakeTimeFromDataBox = yes;
+            DeltaT=1.e-7;
+            ),
+       ReadSurfaceInfoFromFile(
+            FileName=ApparentHorizons/AhBCoefs.dat;
+            Output = AhB;
+            TakeTimeFromDataBox = yes;
+            DeltaT=1.e-7;
+            ),
+
+    );
+
+   # Subdomain(
+   # Items=
+        #volume WeylE
+        # ReadTensorFromDisk(
+        #     Input = VTWeylE;
+        #     Time = 0.0;
+        #     DeltaT = 1.e-10;
+        #     Dim = 3;
+        #     Dir = Streamlines;
+        #     RankSymm = 11;
+        #     Output = VTWeylE;
+        #     ),
+         #volume WeylB
+    #     ReadTensorFromDisk(
+    #         Input = VTWeylB;
+    #         Time = 0.0;
+    #         DeltaT = 1.e-10;
+    #         Dim = 3;
+    #         Dir = Streamlines;
+    #         RankSymm = 11;
+    #         Output = VTWeylB;
+    #         ),
+            
+    #     #spatial g
+    #     ReadTensorFromDisk(
+    #         Input = Inertialg;
+    #         Time = 0.0;
+    #         DeltaT = 1.e-10;
+    #         Dim = 3;
+    #         Dir = Streamlines;
+    #         RankSymm = 11;
+    #         Output = Inertialg;
+    #         ),
+    # );
+    
+    
+    #======
+    # Tendex lines for hole A
+    #======
+    
+    
+Observers =
+    ObserveInSubdir(Subdir=Streamlines;Observers=
+
+        #Tendex for AhA
+        #+z to +x
+        ParallelEigenvectorStreamlines
+            (SymmetricCovariantTensor=VTWeylE;
+             SpatialMetric=Inertialg;
+             MapPrefixFromGridFrame =GridToInertial;
+             AbsoluteErrorScale=1.e-6;
+             MinimumDlambda=1.e-10;
+             InitialDlambda=1.e-3;
+             EigenvalueDegeneracyTol=1.e-9;
+             DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+             Verbosity=2;
+             TerminateOnLambda=50;
+             Initializer=ApparentHorizon(
+                StrahlkorperBasename=AhA;
+Center = (5.12644551435204,0.0114818359942158,0);
+                VecA = (0,0,1);                                                                                                                                                                                                                                                
+                VecB = (-1,0,0);
+                Basename = TendexAhAa_1T;
+                NumStreams = 30.;
+                VecAposition=0.0;
+                VecBposition=1.0;
+                NumRefinements=5;
+                );
+);
+            ),
+
+
+
+
+    ObserveInSubdir(Subdir=Streamlines;Observers=
+
+    #Tendex for AhA
+    #+z to +x
+    ParallelEigenvectorStreamlines
+    (SymmetricCovariantTensor=VTWeylE;
+    SpatialMetric=Inertialg;
+    MapPrefixFromGridFrame =GridToInertial;
+    AbsoluteErrorScale=1.e-6;
+    MinimumDlambda=1.e-10;
+    InitialDlambda=1.e-3;
+    EigenvalueDegeneracyTol=1.e-9;
+    DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+    Verbosity=2;
+    TerminateOnLambda=50;
+    Initializer=ApparentHorizon(
+    StrahlkorperBasename=AhA;
+Center = (5.12644551435204,0.0114818359942158,0);
+    VecA = (0,0,-1);
+    VecB = (-1,0,0);
+    Basename = TendexAhAa_2T;
+    NumStreams = 30.;
+    VecAposition=0.0;
+    VecBposition=1.0;
+    NumRefinements=5;
+    );
+);
+
+    ),
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhA
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylE;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhA;
+Center = (5.12644551435204,0.0114818359942158,0);
+VecA = (0,0,-1);
+VecB = (1,0,0);
+Basename = TendexAhAa_3T;
+NumStreams = 30.;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhA
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylE;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhA;
+Center = (5.12644551435204,0.0114818359942158,0);
+VecA = (0,0,1);
+VecB = (1,0,0);
+Basename = TendexAhAa_4T;
+NumStreams = 30.;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+
+#======
+# Tendex lines for hole B
+#======
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhB
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylE;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhB;
+Center = (-6.41389872394796,0.0114818359942158,0);
+VecA = (0,0,1);
+VecB = (1,0,0);
+Basename = TendexAhB_1T;
+NumStreams = 30.0;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhB
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylE;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhB;
+Center = (-6.41389872394796,0.0114818359942158,0);
+VecA = (0,0,-1);
+VecB = (1,0,0);
+Basename = TendexAhB_2T;
+NumStreams = 30.0;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhB
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylE;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhB;
+Center = (-6.41389872394796,0.0114818359942158,0);
+VecA = (0,0,-1);
+VecB = (-1,0,0);
+Basename = TendexAhB_3T;
+NumStreams = 30.0;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhB
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylE;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhB;
+Center = (-6.41389872394796,0.0114818359942158,0);
+VecA = (0,0,1);
+VecB = (-1,0,0);
+Basename = TendexAhB_4T;
+NumStreams = 30.0;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+
+#===
+# Vortex lines for Hole A
+#===
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhA
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylB;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhA;
+Center = (5.12644551435204,0.0114818359942158,0);
+VecA = (0,0,1);
+VecB = (-1,0,0);
+Basename = VortexAhAa_V1;
+NumStreams = 30.;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+
+
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhA
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylB;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhA;
+Center = (5.12644551435204,0.0114818359942158,0);
+VecA = (0,0,-1);
+VecB = (-1,0,0);
+Basename = VortexAhAa_V2;
+NumStreams = 30.;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhA
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylB;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhA;
+Center = (5.12644551435204,0.0114818359942158,0);
+VecA = (0,0,-1);
+VecB = (1,0,0);
+Basename = VortexAhAa_3V;
+NumStreams = 30.;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhA
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylB;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhA;
+Center = (5.12644551435204,0.0114818359942158,0);
+VecA = (0,0,1);
+VecB = (1,0,0);
+Basename = VortexAhAa_4V;
+NumStreams = 30.;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+#===
+# Vortex Lines for hole B
+#===
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhB
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylB;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhB;
+Center = (-6.41389872394796,0.0114818359942158,0);
+VecA = (0,0,1);
+VecB = (1,0,0);
+Basename = VortexAhB_1V;
+NumStreams = 30.0;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhB
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylB;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhB;
+Center = (-6.41389872394796,0.0114818359942158,0);
+VecA = (0,0,-1);
+VecB = (1,0,0);
+Basename = VortexAhB_2V;
+NumStreams = 30.0;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#Tendex for AhB
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylB;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhB;
+Center = (-6.41389872394796,0.0114818359942158,0);
+VecA = (0,0,-1);
+VecB = (-1,0,0);
+Basename = VortexAhB_3V;
+NumStreams = 30.0;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+),
+
+
+ObserveInSubdir(Subdir=Streamlines;Observers=
+
+#+z to +x
+ParallelEigenvectorStreamlines
+(SymmetricCovariantTensor=VTWeylB;
+SpatialMetric=Inertialg;
+MapPrefixFromGridFrame =GridToInertial;
+AbsoluteErrorScale=1.e-6;
+MinimumDlambda=1.e-10;
+InitialDlambda=1.e-3;
+EigenvalueDegeneracyTol=1.e-9;
+DenseTriggerOnLambda=EveryDeltaT(DeltaT=0.1;);
+Verbosity=2;
+TerminateOnLambda=50;
+Initializer=ApparentHorizon(
+StrahlkorperBasename=AhB;
+Center = (-6.41389872394796,0.0114818359942158,0);
+VecA = (0,0,1);
+VecB = (-1,0,0);
+Basename = VortexAhB_4V;
+NumStreams = 30.0;
+VecAposition=0.0;
+VecBposition=1.0;
+NumRefinements=5;
+););
+
+
+
+
+
+
+       );

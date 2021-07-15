@@ -1,11 +1,14 @@
-These are general instructions on how to compile the thermal noise code on ocean. Since there are two different queues on ocean, there are two different ways to compile the thermal noise codes.
+These are general instructions on how to compile the thermal noise code on ocean. Since 
+there are two different queues which jobs can be submitted on the ocean head node, there
+are two different set of instructions to compile. 
+
 If there are any questions, please ask Samuel.
 
-######################################################
-######################################################
-######### Compileing on the Ocean Nodes ##############
-######################################################
-######################################################
+###############################################################
+###############################################################
+######### Compiling for the Ocean Compute Nodes ###############
+###############################################################
+###############################################################
 
 # Copy over the file the has the information for loading the dealii modules to your home directory.
 cp /home/samuel/bin/dealii_modules.sh ~/
@@ -41,15 +44,15 @@ make
 
 cp /home/samuel/scripts/OceanBatchScripts/ThermalNoiseSlurmBatchSubmit_v2.sh ~/
 
-cp ~/ThermalNoiseSlurmBatchSubmit_v2.sh ~/NumericalCoatingThermalNoise/QuasistaticBrownianThermalNoise/build/
+cp ~/ThermalNoiseSlurmBatchSubmit_v2.sh ~$DIR/NumericalCoatingThermalNoise/QuasistaticBrownianThermalNoise/build/
 
 sbatch ThermalNoiseSlurmBatchSubmit_v2.sh
 
-#####################################################
-#####################################################
-######### Compileing on the Orca Nodes ##############
-#####################################################
-#####################################################
+#############################################################
+#############################################################
+######### Compiling for the Orca Compute Nodes ##############
+#############################################################
+#############################################################
 
 
 # To run most codes on the orca nodes, we need to compile on the orca nodes. First we can copy and clone any neccesary files

@@ -1,7 +1,0 @@
-
-
-# Don't use this one.
-cmake -D CMAKE_Fortran_COMPILER=gfortran-9 -D CMAKE_C_COMPILER=clang -D CMAKE_CXX_COMPILER=clang++ -D CHARM_ROOT=/opt/ohpc/pub/apps/charm/mpi-linux-x86_64-smp -D CMAKE_BUILD_TYPE=Debug -D BUILD_PYTHON_BINDINGS=ON -DUSE_PCH=ON -DASAN=OFF ..
-
-# Use this one.
-cmake -D CMAKE_Fortran_COMPILER=gfortran-9 -D CMAKE_C_COMPILER=clang -D CMAKE_CXX_COMPILER=clang++ -D CHARM_ROOT=/opt/ohpc/pub/apps/charm_6.10.2/mpi-linux-x86_64-smp-mpicxx -D CMAKE_BUILD_TYPE=Release -D BUILD_PYTHON_BINDINGS=ON -DUSE_PCH=ON -DASAN=OFF ..
